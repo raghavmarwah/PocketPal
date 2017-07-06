@@ -13,7 +13,8 @@
         android:id="@+id/homeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:visibility="invisible">
 
     </RelativeLayout>
 
@@ -22,14 +23,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <CalendarView
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:background="?android:attr/windowBackground" />
+
+        <LinearLayout
+            android:id="@+id/calendarButtonArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/calendarView"
+            android:gravity="center"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:id="@+id/addExpButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ADD EXPENDITURE"
+                android:layout_margin="10dp"/>
+            <Button
+                android:id="@+id/viewExpButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VIEW EXPENDITURE"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 

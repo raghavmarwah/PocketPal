@@ -1,11 +1,13 @@
 package com.raghavmarwah.pocketpal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -52,10 +54,34 @@ public class MonthViewActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        //Object Variables
+        //Layout Variables
         homeLayout = (RelativeLayout) findViewById(R.id.homeLayout);
         analystLayout = (RelativeLayout) findViewById(R.id.analystLayout);
         calendarLayout = (RelativeLayout) findViewById(R.id.calendarLayout);
+
+        //Object Variables
+        Button addExpenditure = (Button) findViewById(R.id.addExpButton);
+        Button viewExpenditure = (Button) findViewById(R.id.viewExpButton);
+
+        //onClick listeners
+        addExpenditure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MonthViewActivity.this, AddExpenseActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        viewExpenditure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MonthViewActivity.this, ViewExpenseActivity.class);
+                startActivity(intent);
+
+            }
+        });
     }
 
 }

@@ -3,4 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_budget">Analyst</string>
     <string name="title_calendar">Calendar</string>
+
+    <string name="title_activity_get_started">GetStartedActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

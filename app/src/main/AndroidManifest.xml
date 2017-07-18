@@ -18,6 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Budget">
+            <intent-filter>
+                <action android:name="com.raghavmarwah.pocketpal.Budget" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".InputProfile"></activity>
     </application>
 
 </manifest>

@@ -50,4 +50,14 @@
         android:background="?android:attr/windowBackground"
         app:menu="@menu/navigation" />
 
+    <Button
+        android:id="@+id/cng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/calendarLayout"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="17dp"
+        android:text="change" />
+
 </RelativeLayout>

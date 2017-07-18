@@ -3,4 +3,5 @@
     <string name="title_home">Home</string>
     <string name="title_budget">Analyst</string>
     <string name="title_calendar">Calendar</string>
+    <string-array name="currency"><item>Dollar</item><item>Pound</item><item>Euro</item><item>Yen</item></string-array>
 </resources>

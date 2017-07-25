@@ -1,6 +1,8 @@
 package com.raghavmarwah.pocketpal;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -12,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class MonthViewActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
@@ -19,6 +23,7 @@ public class MonthViewActivity extends AppCompatActivity {
     RelativeLayout analystLayout;
     RelativeLayout calendarLayout;
     RelativeLayout profileLayout;
+    MyDB db = new MyDB(this);
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -31,6 +36,7 @@ public class MonthViewActivity extends AppCompatActivity {
                     analystLayout.setVisibility(View.INVISIBLE);
                     calendarLayout.setVisibility(View.INVISIBLE);
                     profileLayout.setVisibility(View.INVISIBLE);
+                    refreshEverything();
                     return true;
                 case R.id.navigationAnalyst:
                     homeLayout.setVisibility(View.INVISIBLE);
@@ -60,6 +66,7 @@ public class MonthViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_month_view);
+        refreshEverything();
 
         //Bottom navigation bar
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -97,4 +104,30 @@ public class MonthViewActivity extends AppCompatActivity {
         });
     }
 
+    private void refreshEverything() {
+        TextView groceries = (TextView) findViewById(R.id.groceriesTotal);
+        TextView insurances = (TextView) findViewById(R.id.insurancesTotal);
+        TextView phone = (TextView) findViewById(R.id.phoneTotal);
+        TextView rent = (TextView) findViewById(R.id.rentTotal);
+        TextView eat = (TextView) findViewById(R.id.eatTotal);
+        TextView shop = (TextView) findViewById(R.id.shopTotal);
+        TextView misc = (TextView) findViewById(R.id.miscTotal);
+
+        final SQLiteDatabase rdb = db.getReadableDatabase();
+        String query = "SELECT * FROM Expenditures";
+        try {
+            Cursor cursor = rdb.rawQuery(query, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                groceries.setText("$"+cursor.getString(9));
+                insurances.setText("$"+cursor.getString(10));
+                phone.setText("$"+cursor.getString(11));
+                rent.setText("$"+cursor.getString(12));
+                eat.setText("$"+cursor.getString(13));
+                shop.setText("$"+cursor.getString(14));
+                misc.setText("$"+cursor.getString(15));
+            }
+        } catch (Exception ex) {
+        }
+    }
 }

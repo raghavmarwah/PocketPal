@@ -21,14 +21,21 @@ public class MyDB extends SQLiteOpenHelper{
     public static final String SQL_CREATE_ENTRIES_2 = "CREATE TABLE " +
             UserEntry.TABLE_NAME_2 + " (" +
             UserEntry._ID + " INTEGER PRIMARY KEY, " +
-            UserEntry.COLUMN_NAME_DATE + "DATE, " +
-            UserEntry.COLUMN_NAME_GROCERIES + "DECIMAL, " +
-            UserEntry.COLUMN_NAME_INSURANCES + "DECIMAL, " +
-            UserEntry.COLUMN_NAME_BILLS + "DECIMAL, " +
-            UserEntry.COLUMN_NAME_RENT + "DECIMAL, " +
-            UserEntry.COLUMN_NAME_EAT + "DECIMAL, " +
-            UserEntry.COLUMN_NAME_SHOP + "DECIMAL, " +
-            UserEntry.COLUMN_NAME_MISC + "DECIMAL)";
+            UserEntry.COLUMN_NAME_DATE + " DATE, " +
+            UserEntry.COLUMN_NAME_GROCERIES + " DECIMAL, " +
+            UserEntry.COLUMN_NAME_INSURANCES + " DECIMAL, " +
+            UserEntry.COLUMN_NAME_BILLS + " DECIMAL, " +
+            UserEntry.COLUMN_NAME_RENT + " DECIMAL, " +
+            UserEntry.COLUMN_NAME_EAT + " DECIMAL, " +
+            UserEntry.COLUMN_NAME_SHOP + " DECIMAL, " +
+            UserEntry.COLUMN_NAME_MISC + " DECIMAL, " +
+            UserEntry.COLUMN_NAME_GROCERIES_L + " DECIMAL, " +
+            UserEntry.COLUMN_NAME_INSURANCES_L + " DECIMAL, " +
+            UserEntry.COLUMN_NAME_BILLS_L + " DECIMAL, " +
+            UserEntry.COLUMN_NAME_RENT_L + " DECIMAL, " +
+            UserEntry.COLUMN_NAME_EAT_L + " DECIMAL, " +
+            UserEntry.COLUMN_NAME_SHOP_L + " DECIMAL, " +
+            UserEntry.COLUMN_NAME_MISC_L + " DECIMAL)";
 
     private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + UserEntry.TABLE_NAME;
 

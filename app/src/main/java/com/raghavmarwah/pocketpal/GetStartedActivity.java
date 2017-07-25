@@ -46,10 +46,12 @@ public class GetStartedActivity extends AppCompatActivity {
                 if(check==0) {
                     Intent myIntent = new Intent(GetStartedActivity.this, AddUserInfoActivity.class);
                     startActivity(myIntent);
+                    finish();
                 }
                 else{
                     Intent myIntent = new Intent(GetStartedActivity.this,MonthViewActivity.class);
                     startActivity(myIntent);
+                    finish();
                 }
             }
         });

@@ -443,15 +443,6 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/analystLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:visibility="invisible">
-
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/profileLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

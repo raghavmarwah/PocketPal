@@ -19,8 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".myDB" />
-        <activity android:name=".AddUserInfoActivity"></activity>
+        <activity android:name=".AddUserInfoActivity" />
+        <activity
+            android:name=".DisplayChartsActivity"
+            android:label="@string/title_activity_display_charts"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

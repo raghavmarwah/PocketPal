@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -33,26 +35,22 @@ public class MonthViewActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigationHome:
                     homeLayout.setVisibility(View.VISIBLE);
-                    analystLayout.setVisibility(View.INVISIBLE);
                     calendarLayout.setVisibility(View.INVISIBLE);
                     profileLayout.setVisibility(View.INVISIBLE);
                     refreshEverything();
                     return true;
                 case R.id.navigationAnalyst:
-                    homeLayout.setVisibility(View.INVISIBLE);
-                    analystLayout.setVisibility(View.VISIBLE);
-                    calendarLayout.setVisibility(View.INVISIBLE);
-                    profileLayout.setVisibility(View.INVISIBLE);
+                    Intent intent = new Intent(MonthViewActivity.this, DisplayChartsActivity.class);
+                    startActivity(intent);
+                    finish();
                     return true;
                 case R.id.navigationCalendar:
                     homeLayout.setVisibility(View.INVISIBLE);
-                    analystLayout.setVisibility(View.INVISIBLE);
                     calendarLayout.setVisibility(View.VISIBLE);
                     profileLayout.setVisibility(View.INVISIBLE);
                     return true;
                 case R.id.navigationProfile:
                     homeLayout.setVisibility(View.INVISIBLE);
-                    analystLayout.setVisibility(View.INVISIBLE);
                     calendarLayout.setVisibility(View.INVISIBLE);
                     profileLayout.setVisibility(View.VISIBLE);
                     return true;
@@ -75,7 +73,6 @@ public class MonthViewActivity extends AppCompatActivity {
 
         //Layout Variables
         homeLayout = (LinearLayout) findViewById(R.id.homeLayout);
-        analystLayout = (RelativeLayout) findViewById(R.id.analystLayout);
         calendarLayout = (RelativeLayout) findViewById(R.id.calendarLayout);
         profileLayout = (RelativeLayout) findViewById(R.id.profileLayout);
 
@@ -88,7 +85,10 @@ public class MonthViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                CalendarView selectedDate = (CalendarView) findViewById(R.id.calendarView);
+
                 Intent intent = new Intent(MonthViewActivity.this, AddExpenseActivity.class);
+                //intent.putExtra(date,true);
                 startActivity(intent);
 
             }
@@ -96,6 +96,9 @@ public class MonthViewActivity extends AppCompatActivity {
         viewExpenditure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                CalendarView selectedDate = (CalendarView) findViewById(R.id.calendarView);
+                //String date = String.valueOf(selectedDate.getDate());
 
                 Intent intent = new Intent(MonthViewActivity.this, ViewExpenseActivity.class);
                 startActivity(intent);
@@ -112,6 +115,10 @@ public class MonthViewActivity extends AppCompatActivity {
         TextView eat = (TextView) findViewById(R.id.eatTotal);
         TextView shop = (TextView) findViewById(R.id.shopTotal);
         TextView misc = (TextView) findViewById(R.id.miscTotal);
+        TextView monthlyBudget = (TextView) findViewById(R.id.monthlyBudget);
+        TextView currentExpenditure = (TextView) findViewById(R.id.currentExpenditure);
+        double totalBudget = 0;
+
 
         final SQLiteDatabase rdb = db.getReadableDatabase();
         String query = "SELECT * FROM Expenditures";
@@ -119,13 +126,22 @@ public class MonthViewActivity extends AppCompatActivity {
             Cursor cursor = rdb.rawQuery(query, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                groceries.setText("$"+cursor.getString(9));
-                insurances.setText("$"+cursor.getString(10));
-                phone.setText("$"+cursor.getString(11));
-                rent.setText("$"+cursor.getString(12));
-                eat.setText("$"+cursor.getString(13));
-                shop.setText("$"+cursor.getString(14));
-                misc.setText("$"+cursor.getString(15));
+                groceries.setText("$" + cursor.getString(9));
+                totalBudget += Integer.parseInt(cursor.getString(9));
+                insurances.setText("$" + cursor.getString(10));
+                totalBudget += Integer.parseInt(cursor.getString(10));
+                phone.setText("$" + cursor.getString(11));
+                totalBudget += Integer.parseInt(cursor.getString(11));
+                rent.setText("$" + cursor.getString(12));
+                totalBudget += Integer.parseInt(cursor.getString(12));
+                eat.setText("$" + cursor.getString(13));
+                totalBudget += Integer.parseInt(cursor.getString(13));
+                shop.setText("$" + cursor.getString(14));
+                totalBudget += Integer.parseInt(cursor.getString(14));
+                misc.setText("$" + cursor.getString(15));
+                totalBudget += Integer.parseInt(cursor.getString(15));
+
+                monthlyBudget.setText("$" + totalBudget);
             }
         } catch (Exception ex) {
         }

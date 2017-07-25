@@ -16,4 +16,9 @@
         android:icon="@drawable/ic_budget_analyst"
         android:title="@string/title_budget" />
 
+    <item
+        android:id="@+id/navigationProfile"
+        android:icon="@drawable/ic_user_profile"
+        android:title="@string/title_profile" />
+
 </menu>

@@ -9,21 +9,404 @@
     tools:context="com.raghavmarwah.pocketpal.MonthViewActivity"
     android:background="#ffffff">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/homeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:visibility="invisible">
+        android:visibility="visible"
+        android:orientation="vertical">
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monthly Budget"
+                android:layout_alignParentLeft="true"
+                android:textSize="17sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"/>
+            <TextView
+                android:id="@+id/monthlyBudget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:layout_alignParentRight="true"
+                android:textSize="19sp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                android:textColor="#000000"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Expenditure"
+                android:layout_alignParentLeft="true"
+                android:textSize="17sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"/>
+            <TextView
+                android:id="@+id/currentExpenditure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:layout_alignParentRight="true"
+                android:textSize="17sp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/groceriesText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:text="Groceries"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"/>
+            <TextView
+                android:id="@+id/groceriesTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:layout_alignParentRight="true"
+                android:textSize="19sp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#000000"/>
+
+            <ProgressBar
+                android:id="@+id/groceriesProgress"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/groceriesText"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:progress="50"
+                android:progressTint="@color/progressColor" />
+            <TextView
+                android:id="@+id/groceriesCurrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:layout_alignParentRight="true"
+                android:textSize="17sp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/groceriesText"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground">
+
+            <TextView
+                android:id="@+id/insurancesText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:text="Insurances"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"/>
+            <TextView
+                android:id="@+id/insurancesTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:layout_alignParentRight="true"
+                android:textSize="19sp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#000000"/>
+
+            <ProgressBar
+                android:id="@+id/insurancesProgress"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/insurancesText"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:progress="50"
+                android:progressTint="@color/progressColor" />
+            <TextView
+                android:id="@+id/insurancesCurrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:layout_alignParentRight="true"
+                android:textSize="17sp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/insurancesText"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground">
+
+            <TextView
+                android:id="@+id/phoneText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:text="Phone Bills"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"/>
+            <TextView
+                android:id="@+id/phoneTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:layout_alignParentRight="true"
+                android:textSize="19sp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#000000"/>
+
+            <ProgressBar
+                android:id="@+id/phoneProgress"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/phoneText"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:progress="50"
+                android:progressTint="@color/progressColor" />
+            <TextView
+                android:id="@+id/phoneCurrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:layout_alignParentRight="true"
+                android:textSize="17sp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/phoneText"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground">
+
+            <TextView
+                android:id="@+id/rentText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:text="Rent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"/>
+            <TextView
+                android:id="@+id/rentTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:layout_alignParentRight="true"
+                android:textSize="19sp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#000000"/>
+
+            <ProgressBar
+                android:id="@+id/rentProgress"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rentText"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:progress="50"
+                android:progressTint="@color/progressColor" />
+            <TextView
+                android:id="@+id/rentCurrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:layout_alignParentRight="true"
+                android:textSize="17sp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/rentText"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground">
+
+            <TextView
+                android:id="@+id/eatText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:text="Eating Out"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"/>
+            <TextView
+                android:id="@+id/eatTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:layout_alignParentRight="true"
+                android:textSize="19sp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#000000"/>
+
+            <ProgressBar
+                android:id="@+id/eatProgress"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/eatText"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:progress="50"
+                android:progressTint="@color/progressColor" />
+            <TextView
+                android:id="@+id/eatCurrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:layout_alignParentRight="true"
+                android:textSize="17sp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/eatText"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground">
+
+            <TextView
+                android:id="@+id/shopText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:text="Shopping"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"/>
+            <TextView
+                android:id="@+id/shopTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:layout_alignParentRight="true"
+                android:textSize="19sp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#000000"/>
+
+            <ProgressBar
+                android:id="@+id/shopProgress"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/shopText"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:progress="50"
+                android:progressTint="@color/progressColor" />
+            <TextView
+                android:id="@+id/shopCurrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:layout_alignParentRight="true"
+                android:textSize="17sp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/shopText"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground">
+
+            <TextView
+                android:id="@+id/miscText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:text="Miscellaneous"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"/>
+            <TextView
+                android:id="@+id/miscTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:layout_alignParentRight="true"
+                android:textSize="19sp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#000000"/>
+
+            <ProgressBar
+                android:id="@+id/miscProgress"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/miscText"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:progress="50"
+                android:progressTint="@color/progressColor" />
+            <TextView
+                android:id="@+id/miscCurrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:layout_alignParentRight="true"
+                android:textSize="17sp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/miscText"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/calendarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <CalendarView
             android:id="@+id/calendarView"
@@ -65,6 +448,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:visibility="invisible">
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/profileLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:visibility="visible">
+
+
 
     </RelativeLayout>
 

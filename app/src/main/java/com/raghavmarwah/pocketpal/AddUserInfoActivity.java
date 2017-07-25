@@ -32,63 +32,20 @@ public class AddUserInfoActivity extends AppCompatActivity {
         MyDB db = new MyDB(this);
         final SQLiteDatabase wdb = db.getWritableDatabase();
         final SQLiteDatabase rdb = db.getReadableDatabase();
-        //final TableLayout theView = (TableLayout) findViewById(R.id.thetable);
-
         Button bAdd = (Button) findViewById(R.id.gobtn);
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText eNM = (EditText) findViewById(R.id.name);
                 EditText eEM = (EditText) findViewById(R.id.email);
-                EditText eIn = (EditText) findViewById(R.id.income);
+                EditText eIN = (EditText) findViewById(R.id.income);
 
                 ContentValues values = new ContentValues();
                 values.put(UserEntry.COLUMN_NAME_USRNAME, eNM.getText().toString());
                 values.put(UserEntry.COLUMN_NAME_EMAIL, eEM.getText().toString());
-                long newRowID = wdb.insert(UserEntry.TABLE_NAME, null, values);
+                values.put(UserEntry.COLUMN_NAME_INCOME, eIN.getText().toString());
+                wdb.insert(UserEntry.TABLE_NAME, null, values);
 
-                /*theView.removeAllViews();
-
-                String selectQuery = "SELECT * FROM " + UserEntry.TABLE_NAME;
-                try {
-                    Cursor cursor = rdb.rawQuery(selectQuery, null);
-                    if (cursor != null) {
-                        cursor.moveToFirst();
-                        TextView data;
-                        TableRow row;
-                        int cnt = 0;
-                        do {
-                            row = new TableRow(AddUserInfoActivity.this);
-                            row.setPadding(2, 2, 2, 2);
-                            if (cnt++ % 2 == 0)
-                                row.setBackgroundColor(Color.WHITE);
-                            for (int i = 0; i < cursor.getColumnCount(); i++) {
-                                data = new TextView(AddUserInfoActivity.this);
-                                if (i == 0) {
-                                    data.setTypeface(Typeface.DEFAULT_BOLD);
-                                    data.setGravity(Gravity.CENTER_HORIZONTAL);
-                                }
-                                data.setText(cursor.getString(i));
-                                row.addView(data);
-
-                            }
-                            theView.addView(row);
-                        } while (cursor.moveToNext());
-                        theView.setShrinkAllColumns(true);
-                        theView.setStretchAllColumns(true);
-                    }
-
-                } catch (Exception ex) {
-                }*/
-
-            }
-        });
-
-        Button next = (Button) findViewById(R.id.gobtn);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
             }
         });
     }}

@@ -12,11 +12,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MonthViewActivity extends AppCompatActivity {
 
@@ -85,10 +89,11 @@ public class MonthViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                CalendarView selectedDate = (CalendarView) findViewById(R.id.calendarView);
+                DatePicker selectedDate = (DatePicker) findViewById(R.id.calendarView);
+                String date = selectedDate.getYear()+"-"+(selectedDate.getMonth()+1)+"-"+selectedDate.getDayOfMonth();
 
                 Intent intent = new Intent(MonthViewActivity.this, AddExpenseActivity.class);
-                //intent.putExtra(date,true);
+                intent.putExtra("date", date);
                 startActivity(intent);
 
             }
@@ -97,10 +102,11 @@ public class MonthViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                CalendarView selectedDate = (CalendarView) findViewById(R.id.calendarView);
-                //String date = String.valueOf(selectedDate.getDate());
+                DatePicker selectedDate = (DatePicker) findViewById(R.id.calendarView);
+                String date = selectedDate.getYear()+"-"+(selectedDate.getMonth()+1)+"-"+selectedDate.getDayOfMonth();
 
                 Intent intent = new Intent(MonthViewActivity.this, ViewExpenseActivity.class);
+                intent.putExtra("date", date);
                 startActivity(intent);
 
             }

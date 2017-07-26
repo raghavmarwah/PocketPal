@@ -408,13 +408,15 @@
         android:layout_alignParentStart="true"
         android:visibility="invisible">
 
-        <CalendarView
+        <DatePicker
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:background="?android:attr/windowBackground" />
+            android:layout_marginTop="5dp"
+            android:headerBackground="@color/progressColor">
+
+        </DatePicker>
 
         <LinearLayout
             android:id="@+id/calendarButtonArea"
@@ -423,7 +425,7 @@
             android:orientation="horizontal"
             android:layout_below="@id/calendarView"
             android:gravity="center"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="5dp">
 
             <Button
                 android:id="@+id/addExpButton"

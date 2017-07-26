@@ -70,6 +70,7 @@ public class DisplayChartsActivity extends AppCompatActivity {
     public void onBackPressed(){
         Intent intent = new Intent(DisplayChartsActivity.this, MonthViewActivity.class);
         startActivity(intent);
+        finish();
     }
 
 

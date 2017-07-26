@@ -3,29 +3,18 @@ package com.raghavmarwah.pocketpal;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
-
-import java.io.FileDescriptor;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class MonthViewActivity extends AppCompatActivity {
 
@@ -35,7 +24,6 @@ public class MonthViewActivity extends AppCompatActivity {
     RelativeLayout calendarLayout;
     RelativeLayout profileLayout;
     MyDB db = new MyDB(this);
-    private ImageView pic;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -67,7 +55,6 @@ public class MonthViewActivity extends AppCompatActivity {
                     analystLayout.setVisibility(View.INVISIBLE);
                     calendarLayout.setVisibility(View.INVISIBLE);
                     profileLayout.setVisibility(View.VISIBLE);
-                    DisplayProfile();
                     return true;
             }
             return false;
@@ -79,8 +66,7 @@ public class MonthViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_month_view);
-        refreshEverything();DisplayProfile();
-        pic = (ImageView) findViewById(R.id.propic);
+        refreshEverything();
 
         //Bottom navigation bar
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -114,47 +100,6 @@ public class MonthViewActivity extends AppCompatActivity {
                 Intent intent = new Intent(MonthViewActivity.this, ViewExpenseActivity.class);
                 startActivity(intent);
 
-            }
-        });
-    }
-
-    private void DisplayProfile() {
-
-        TextView username = (TextView) findViewById(R.id.usrname);
-        TextView email = (TextView) findViewById(R.id.email);
-        TextView inc = (TextView) findViewById(R.id.income);
-        Button delete = (Button) findViewById(R.id.delete);
-
-        final SQLiteDatabase rdb = db.getReadableDatabase();
-        final SQLiteDatabase wdb = db.getWritableDatabase();
-        String query = "SELECT * FROM Entry";
-        try {
-            Cursor cursor = rdb.rawQuery(query, null);
-            if (cursor != null) {
-                cursor.moveToFirst();
-                username.setText(cursor.getString(1));
-                email.setText(cursor.getString(2));
-                inc.setText(cursor.getString(3));
-                String uriimage = cursor.getString(4).toString();
-                Uri finalUri = Uri.parse(uriimage);
-                InputStream inputStream;
-                try
-                {
-                    inputStream = getContentResolver().openInputStream(finalUri);
-                    Bitmap image = BitmapFactory.decodeStream(inputStream);
-                    pic.setImageBitmap(image);
-                    Log.d("done",uriimage);
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        } catch (Exception ex) {}
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                db.onDelete(wdb);
             }
         });
     }

@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -457,8 +457,47 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:visibility="invisible">
+        <ImageView
+            android:id="@+id/propic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            />
 
+        <TextView
+            android:id="@+id/usrname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/propic"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:textSize="40dp"/>
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/usrname"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:textSize="40dp"/>
+        <TextView
+            android:id="@+id/income"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/email"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:textSize="40dp"/>
 
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/income"
+            android:text="DELETE PROFILE"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"/>
 
     </RelativeLayout>
 

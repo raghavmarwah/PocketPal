@@ -1,33 +1,42 @@
 package com.raghavmarwah.pocketpal;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
-import android.graphics.Typeface;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
+
 
 public class AddUserInfoActivity extends AppCompatActivity {
+    private static final int SELECT_PHOTO = 1;
+    private String selectedImagePath = "";
+
+    private void OpenGallery(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,
+                "Select Photo"), SELECT_PHOTO);
+    }
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user_info);
 
-        //Making activity fullscreen!!
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
-        //Hiding the ActionBar
         getSupportActionBar().hide();
 
         final LinearLayout defineProfile = (LinearLayout) findViewById(R.id.user_data_layout);
@@ -36,7 +45,23 @@ public class AddUserInfoActivity extends AppCompatActivity {
         Log.d("MainActivity", "onCreate");
         MyDB db = new MyDB(this);
         final SQLiteDatabase wdb = db.getWritableDatabase();
-        final SQLiteDatabase rdb = db.getReadableDatabase();
+
+        ImageButton img = (ImageButton) findViewById(R.id.imageButton2);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+                {
+                    OpenGallery();
+                }
+                else
+                {
+                    String[] permissionRequested = {Manifest.permission.READ_EXTERNAL_STORAGE};
+                requestPermissions(permissionRequested,1);
+                }
+
+            }
+        });
         final Button bAdd = (Button) findViewById(R.id.gobtn);
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,15 +76,15 @@ public class AddUserInfoActivity extends AppCompatActivity {
                     values.put(UserEntry.COLUMN_NAME_USRNAME, eNM.getText().toString());
                     values.put(UserEntry.COLUMN_NAME_EMAIL, eEM.getText().toString());
                     values.put(UserEntry.COLUMN_NAME_INCOME, eIN.getText().toString());
+                    values.put(UserEntry.IMAGE,selectedImagePath.toString());
                     wdb.insert(UserEntry.TABLE_NAME, null, values);
-
                     bAdd.setText("FINISH");
                     defineProfile.setVisibility(View.INVISIBLE);
                     defineBudget.setVisibility(View.VISIBLE);
                 }
                 else{
                     EditText groceries = (EditText) findViewById(R.id.groceries);
-                    EditText insuarances = (EditText) findViewById(R.id.insurances);
+                    EditText insurances = (EditText) findViewById(R.id.insurances);
                     EditText phone = (EditText) findViewById(R.id.phone);
                     EditText rent = (EditText) findViewById(R.id.rent);
                     EditText eat = (EditText) findViewById(R.id.eat);
@@ -68,7 +93,7 @@ public class AddUserInfoActivity extends AppCompatActivity {
 
                     ContentValues values = new ContentValues();
                     values.put(UserEntry.COLUMN_NAME_GROCERIES_L, groceries.getText().toString());
-                    values.put(UserEntry.COLUMN_NAME_INSURANCES_L, insuarances.getText().toString());
+                    values.put(UserEntry.COLUMN_NAME_INSURANCES_L, insurances.getText().toString());
                     values.put(UserEntry.COLUMN_NAME_BILLS_L, phone.getText().toString());
                     values.put(UserEntry.COLUMN_NAME_RENT_L, rent.getText().toString());
                     values.put(UserEntry.COLUMN_NAME_EAT_L, eat.getText().toString());
@@ -82,5 +107,44 @@ public class AddUserInfoActivity extends AppCompatActivity {
                 }
             }
         });
-    }}
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == 1)
+        {
+            if(grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                OpenGallery();
+            }
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == SELECT_PHOTO) {
+                Uri selectedImageUri = data.getData();
+                selectedImagePath = getPath(selectedImageUri);
+            }
+        }
+    }
+
+    public String getPath(Uri uri) {
+        if( uri == null ) {
+            return null;
+        }
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+        if( cursor != null ){
+            int column_index = cursor
+                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            String path = cursor.getString(column_index);
+            cursor.close();
+            return path;
+        }
+        return uri.getPath();
+    }
+
+}

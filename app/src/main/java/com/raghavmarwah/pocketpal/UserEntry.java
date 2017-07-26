@@ -12,6 +12,7 @@ public class UserEntry implements BaseColumns{
     public static final String COLUMN_NAME_USRNAME = "NAME";
     public static final String COLUMN_NAME_EMAIL = "EMAIL";
     public static final String COLUMN_NAME_INCOME = "INCOME";
+    public static final String IMAGE = "image";
 
 
     public static final String TABLE_NAME_2 = "Expenditures";

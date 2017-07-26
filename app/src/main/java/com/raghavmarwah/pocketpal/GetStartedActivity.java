@@ -16,11 +16,8 @@ public class GetStartedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_started);
-
-        //Making activity fullscreen!!
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
-        //Hiding the ActionBar
         getSupportActionBar().hide();
 
 

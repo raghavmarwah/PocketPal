@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.PocketPal.pocketpal.MonthViewActivity"
+    tools:context="com.csis3175.pocketpal.MonthViewActivity"
     android:background="#ffffff">
 
     <LinearLayout

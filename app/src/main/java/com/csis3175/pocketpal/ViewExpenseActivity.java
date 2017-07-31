@@ -1,4 +1,4 @@
-package com.PocketPal.pocketpal;
+package com.csis3175.pocketpal;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -41,6 +41,7 @@ public class ViewExpenseActivity extends AppCompatActivity {
                 TableRow row;
                 int count = 1;
                 do {
+
                     row = new TableRow(ViewExpenseActivity.this);
                     row.setPadding(3,3,3,3);
                     data = new TextView(ViewExpenseActivity.this);
@@ -81,7 +82,7 @@ public class ViewExpenseActivity extends AppCompatActivity {
         else if (i == 4)
             return "Rent";
         else if (i == 5)
-            return "Dinning Out";
+            return "Eating Out";
         else if (i == 6)
             return "Shopping";
         else if (i == 7)

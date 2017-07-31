@@ -1,4 +1,4 @@
-package com.PocketPal.pocketpal;
+package com.csis3175.pocketpal;
 
 import android.Manifest;
 import android.content.ContentValues;
@@ -62,25 +62,29 @@ public class AddUserInfoActivity extends AppCompatActivity {
 
             }
         });
+
         final Button bAdd = (Button) findViewById(R.id.gobtn);
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(defineProfile.getVisibility()==View.VISIBLE){
 
-                    EditText eNM = (EditText) findViewById(R.id.name);
-                    EditText eEM = (EditText) findViewById(R.id.email);
-                    EditText eIN = (EditText) findViewById(R.id.income);
+                    boolean dataFilled = false;
+                    while(dataFilled) {
+                        EditText eNM = (EditText) findViewById(R.id.name);
+                        EditText eEM = (EditText) findViewById(R.id.email);
+                        EditText eIN = (EditText) findViewById(R.id.income);
 
-                    ContentValues values = new ContentValues();
-                    values.put(UserEntry.COLUMN_NAME_USRNAME, eNM.getText().toString());
-                    values.put(UserEntry.COLUMN_NAME_EMAIL, eEM.getText().toString());
-                    values.put(UserEntry.COLUMN_NAME_INCOME, eIN.getText().toString());
-                    values.put(UserEntry.IMAGE,selectedImagePath.toString());
-                    wdb.insert(UserEntry.TABLE_NAME, null, values);
-                    bAdd.setText("FINISH");
-                    defineProfile.setVisibility(View.INVISIBLE);
-                    defineBudget.setVisibility(View.VISIBLE);
+                        ContentValues values = new ContentValues();
+                        values.put(UserEntry.COLUMN_NAME_USRNAME, eNM.getText().toString());
+                        values.put(UserEntry.COLUMN_NAME_EMAIL, eEM.getText().toString());
+                        values.put(UserEntry.COLUMN_NAME_INCOME, eIN.getText().toString());
+                        values.put(UserEntry.IMAGE, selectedImagePath.toString());
+                        wdb.insert(UserEntry.TABLE_NAME, null, values);
+                        bAdd.setText("FINISH");
+                        defineProfile.setVisibility(View.INVISIBLE);
+                        defineBudget.setVisibility(View.VISIBLE);
+                    }
                 }
                 else{
                     EditText groceries = (EditText) findViewById(R.id.groceries);

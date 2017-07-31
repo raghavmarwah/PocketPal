@@ -1,4 +1,4 @@
-package com.PocketPal.pocketpal;
+package com.csis3175.pocketpal;
 
 import android.content.Intent;
 import android.database.Cursor;

@@ -23,11 +23,9 @@ public class AddUserInfoActivity extends AppCompatActivity {
     private String selectedImagePath = "";
 
     private void OpenGallery(){
-        Intent intent = new Intent();
+        Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,
-                "Select Photo"), SELECT_PHOTO);
+        startActivityForResult(intent, SELECT_PHOTO);
     }
 
     @Override
@@ -46,13 +44,19 @@ public class AddUserInfoActivity extends AppCompatActivity {
         MyDB db = new MyDB(this);
         final SQLiteDatabase wdb = db.getWritableDatabase();
 
-        ImageButton img = (ImageButton) findViewById(R.id.imageButton2);
+        final ImageButton img = (ImageButton) findViewById(R.id.imageButton2);
+        img.setImageResource(R.drawable.ic_add_item);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
                 {
-                    OpenGallery();
+                    img.setSelected(!img.isPressed());
+
+                    if (img.isPressed()) {
+                        OpenGallery();
+                        img.setImageResource(R.drawable.ic_check);
+                    }
                 }
                 else
                 {

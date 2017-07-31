@@ -66,9 +66,4 @@ public class MyDB extends SQLiteOpenHelper{
         Log.d("MyDB","onDowngrade");
         onUpgrade(db, oldVersion, newVersion);
     }
-
-    public void onDelete(SQLiteDatabase db){
-        db.execSQL(SQL_DELETE_ENTRIES);
-        Log.d("MyDB","Delete");
-    }
 }

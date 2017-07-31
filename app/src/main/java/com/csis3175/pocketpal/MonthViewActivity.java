@@ -158,7 +158,7 @@ public class MonthViewActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.onDelete(wdb);
+
             }
         });
     }
@@ -283,7 +283,7 @@ public class MonthViewActivity extends AppCompatActivity {
             if(fp <= 0)
                 return 0;
             else if (fp > 100)
-                return 0;
+                return 100;
             else
             return fp;
         }

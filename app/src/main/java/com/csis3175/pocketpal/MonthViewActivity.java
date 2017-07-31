@@ -164,6 +164,7 @@ public class MonthViewActivity extends AppCompatActivity {
     }
 
     private void refreshEverything() {
+
         TextView groceries = (TextView) findViewById(R.id.groceriesTotal);
         TextView insurances = (TextView) findViewById(R.id.insurancesTotal);
         TextView phone = (TextView) findViewById(R.id.phoneTotal);
@@ -171,24 +172,29 @@ public class MonthViewActivity extends AppCompatActivity {
         TextView eat = (TextView) findViewById(R.id.eatTotal);
         TextView shop = (TextView) findViewById(R.id.shopTotal);
         TextView misc = (TextView) findViewById(R.id.miscTotal);
+
         TextView groceries2 = (TextView) findViewById(R.id.groceriesCurrent);
-        ProgressBar progressgroc = (ProgressBar) findViewById(R.id.groceriesProgress);
         TextView insurances2 = (TextView) findViewById(R.id.insurancesCurrent);
-        ProgressBar progressinc = (ProgressBar) findViewById(R.id.insurancesProgress);
         TextView phone2 = (TextView) findViewById(R.id.phoneCurrent);
-        ProgressBar progressphn = (ProgressBar) findViewById(R.id.phoneProgress);
         TextView rent2 = (TextView) findViewById(R.id.rentCurrent);
-        ProgressBar progressrent = (ProgressBar) findViewById(R.id.rentProgress);
         TextView eat2 = (TextView) findViewById(R.id.eatCurrent);
-        ProgressBar progresseat = (ProgressBar) findViewById(R.id.eatProgress);
         TextView shop2 = (TextView) findViewById(R.id.shopCurrent);
-        ProgressBar progressshop = (ProgressBar) findViewById(R.id.shopProgress);
         TextView misc2 = (TextView) findViewById(R.id.miscCurrent);
-        ProgressBar progressmisc = (ProgressBar) findViewById(R.id.miscProgress);
+
         TextView monthlyBudget = (TextView) findViewById(R.id.monthlyBudget);
         TextView currentExpenditure = (TextView) findViewById(R.id.currentExpenditure);
+
+        ProgressBar progressgroc = (ProgressBar) findViewById(R.id.groceriesProgress);
+        ProgressBar progressinc = (ProgressBar) findViewById(R.id.insurancesProgress);
+        ProgressBar progressphn = (ProgressBar) findViewById(R.id.phoneProgress);
+        ProgressBar progressrent = (ProgressBar) findViewById(R.id.rentProgress);
+        ProgressBar progresseat = (ProgressBar) findViewById(R.id.eatProgress);
+        ProgressBar progressshop = (ProgressBar) findViewById(R.id.shopProgress);
+        ProgressBar progressmisc = (ProgressBar) findViewById(R.id.miscProgress);
+
         double totalBudget = 0;
         double totalExpenditure = 0;
+
         groc=0;ins=0;ph=0;rnt=0;et=0;shp=0;msc=0;
 
         final SQLiteDatabase rdb = db.getReadableDatabase();
@@ -224,15 +230,18 @@ public class MonthViewActivity extends AppCompatActivity {
             if (cursor != null) {
                 cursor.move(1);
                 do {
+
                     for (int i = 1; i < cursor.getColumnCount(); i++) {
                         String x = cursor.getString(i);
                         list.add(x);
                         Log.d("d",cursor.getString(i));
                     }
+
                     List<String> temp = new ArrayList<>(list);
                     list.remove(0);
                     list.removeAll(Arrays.asList("0"));
                     int i = temp.indexOf(list.get(0).toString());
+
                     String s = v.getExpense(i);
                     if (s == "Grocery")
                         groc += Double.parseDouble(list.get(0));
@@ -248,9 +257,12 @@ public class MonthViewActivity extends AppCompatActivity {
                         shp += Double.parseDouble(list.get(0));
                     else if (s == "Miscellaneous")
                         msc += Double.parseDouble(list.get(0));
+
                     totalExpenditure += Double.parseDouble(list.get(0));
                     list.clear();
+
                 } while (cursor.moveToNext());
+
                 currentExpenditure.setText("$" + totalExpenditure);
                 groceries2.setText("$" + groc);
                 insurances2.setText("$" + ins);
@@ -259,14 +271,14 @@ public class MonthViewActivity extends AppCompatActivity {
                 eat2.setText("$" + et);
                 shop2.setText("$" + shp);
                 misc2.setText("$" + msc);
-                Log.d("groc",String.valueOf(checkprogress(msc2,msc)));
-                progressgroc.setProgress(checkprogress(groc2,groc));
-                progressinc.setProgress(checkprogress(ins2,ins));
-                progressphn.setProgress(checkprogress(ph2,ph));
-                progressrent.setProgress(checkprogress(rnt2,rnt));
-                progresseat.setProgress(checkprogress(et2,et));
-                progressshop.setProgress(checkprogress(shp2,shp));
-                progressmisc.setProgress(checkprogress(msc2,msc));
+
+                progressgroc.setProgress(checkProgress(groc2,groc));
+                progressinc.setProgress(checkProgress(ins2,ins));
+                progressphn.setProgress(checkProgress(ph2,ph));
+                progressrent.setProgress(checkProgress(rnt2,rnt));
+                progresseat.setProgress(checkProgress(et2,et));
+                progressshop.setProgress(checkProgress(shp2,shp));
+                progressmisc.setProgress(checkProgress(msc2,msc));
 
                 cursor.close();
             }
@@ -274,7 +286,7 @@ public class MonthViewActivity extends AppCompatActivity {
         }
     }
 
-    public int checkprogress(Double x,Double y) {
+    public int checkProgress(Double x,Double y) {
         if(y == 0)
             return 0;
         else {

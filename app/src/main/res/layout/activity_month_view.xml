@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.raghavmarwah.pocketpal.MonthViewActivity"
+    tools:context="com.PocketPal.pocketpal.MonthViewActivity"
     android:background="#ffffff">
 
     <LinearLayout
@@ -101,7 +101,6 @@
                 android:layout_below="@id/groceriesText"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="5dp"
-                android:progress="50"
                 android:progressTint="@color/progressColor" />
             <TextView
                 android:id="@+id/groceriesCurrent"
@@ -148,7 +147,6 @@
                 android:layout_below="@id/insurancesText"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="5dp"
-                android:progress="50"
                 android:progressTint="@color/progressColor" />
             <TextView
                 android:id="@+id/insurancesCurrent"
@@ -195,7 +193,6 @@
                 android:layout_below="@id/phoneText"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="5dp"
-                android:progress="50"
                 android:progressTint="@color/progressColor" />
             <TextView
                 android:id="@+id/phoneCurrent"
@@ -242,7 +239,6 @@
                 android:layout_below="@id/rentText"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="5dp"
-                android:progress="50"
                 android:progressTint="@color/progressColor" />
             <TextView
                 android:id="@+id/rentCurrent"
@@ -289,7 +285,6 @@
                 android:layout_below="@id/eatText"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="5dp"
-                android:progress="50"
                 android:progressTint="@color/progressColor" />
             <TextView
                 android:id="@+id/eatCurrent"
@@ -336,7 +331,6 @@
                 android:layout_below="@id/shopText"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="5dp"
-                android:progress="50"
                 android:progressTint="@color/progressColor" />
             <TextView
                 android:id="@+id/shopCurrent"
@@ -383,7 +377,6 @@
                 android:layout_below="@id/miscText"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="5dp"
-                android:progress="50"
                 android:progressTint="@color/progressColor" />
             <TextView
                 android:id="@+id/miscCurrent"

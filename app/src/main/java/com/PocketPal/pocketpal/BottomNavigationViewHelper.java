@@ -3,7 +3,7 @@
     https://stackoverflow.com/questions/44342530/how-to-make-bottom-navigation-show-menu-items-with-icon-and-text-except-center-i
 */
 
-package com.raghavmarwah.pocketpal;
+package com.PocketPal.pocketpal;
 
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;

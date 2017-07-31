@@ -1,4 +1,4 @@
-package com.raghavmarwah.pocketpal;
+package com.PocketPal.pocketpal;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;

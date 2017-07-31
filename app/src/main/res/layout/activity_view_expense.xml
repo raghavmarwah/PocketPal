@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.raghavmarwah.pocketpal.ViewExpenseActivity">
+    tools:context="com.PocketPal.pocketpal.ViewExpenseActivity">
 
     <TextView
         android:id="@+id/dateText"
@@ -45,5 +45,34 @@
 
 
     </GridLayout>
+
+    <TableLayout
+        android:id="@+id/theTable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="#EAE5E5"
+        android:layout_below="@+id/displayGrid"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </TableLayout>
 
 </RelativeLayout>

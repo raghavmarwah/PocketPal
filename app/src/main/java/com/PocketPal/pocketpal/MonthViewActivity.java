@@ -1,35 +1,47 @@
-package com.raghavmarwah.pocketpal;
+package com.PocketPal.pocketpal;
 
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 public class MonthViewActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
     LinearLayout homeLayout;
-    RelativeLayout analystLayout;
     RelativeLayout calendarLayout;
     RelativeLayout profileLayout;
     MyDB db = new MyDB(this);
     private ImageView pic;
+    ViewExpenseActivity v = new ViewExpenseActivity();
+    public double groc=0,ins=0,ph=0,rnt=0,et=0,shp=0,msc=0;
+    public double groc2=0,ins2=0,ph2=0,rnt2=0,et2=0,shp2=0,msc2=0;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -124,14 +136,14 @@ public class MonthViewActivity extends AppCompatActivity {
 
         final SQLiteDatabase rdb = db.getReadableDatabase();
         final SQLiteDatabase wdb = db.getWritableDatabase();
-        String query = "SELECT * FROM Entry";
+        String query = "SELECT * FROM User";
         try {
             Cursor cursor = rdb.rawQuery(query, null);
             if (cursor != null) {
                 cursor.moveToFirst();
                 username.setText(cursor.getString(1));
                 email.setText(cursor.getString(2));
-                inc.setText(cursor.getString(3));
+                inc.setText("$" + cursor.getString(3));
                 String uriimage = cursor.getString(4).toString();
                 Uri finalUri = Uri.parse("file:// "+ uriimage);
                 InputStream inputStream;
@@ -150,7 +162,7 @@ public class MonthViewActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // db.onDelete(wdb);
+                db.onDelete(wdb);
             }
         });
     }
@@ -163,35 +175,122 @@ public class MonthViewActivity extends AppCompatActivity {
         TextView eat = (TextView) findViewById(R.id.eatTotal);
         TextView shop = (TextView) findViewById(R.id.shopTotal);
         TextView misc = (TextView) findViewById(R.id.miscTotal);
+        TextView groceries2 = (TextView) findViewById(R.id.groceriesCurrent);
+        ProgressBar progressgroc = (ProgressBar) findViewById(R.id.groceriesProgress);
+        TextView insurances2 = (TextView) findViewById(R.id.insurancesCurrent);
+        ProgressBar progressinc = (ProgressBar) findViewById(R.id.insurancesProgress);
+        TextView phone2 = (TextView) findViewById(R.id.phoneCurrent);
+        ProgressBar progressphn = (ProgressBar) findViewById(R.id.phoneProgress);
+        TextView rent2 = (TextView) findViewById(R.id.rentCurrent);
+        ProgressBar progressrent = (ProgressBar) findViewById(R.id.rentProgress);
+        TextView eat2 = (TextView) findViewById(R.id.eatCurrent);
+        ProgressBar progresseat = (ProgressBar) findViewById(R.id.eatProgress);
+        TextView shop2 = (TextView) findViewById(R.id.shopCurrent);
+        ProgressBar progressshop = (ProgressBar) findViewById(R.id.shopProgress);
+        TextView misc2 = (TextView) findViewById(R.id.miscCurrent);
+        ProgressBar progressmisc = (ProgressBar) findViewById(R.id.miscProgress);
         TextView monthlyBudget = (TextView) findViewById(R.id.monthlyBudget);
         TextView currentExpenditure = (TextView) findViewById(R.id.currentExpenditure);
         double totalBudget = 0;
-
+        double totalExpenditure = 0;
+        groc=0;ins=0;ph=0;rnt=0;et=0;shp=0;msc=0;
 
         final SQLiteDatabase rdb = db.getReadableDatabase();
-        String query = "SELECT * FROM Expenditures";
+        String query = "SELECT * FROM Budget";
         try {
             Cursor cursor = rdb.rawQuery(query, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                groceries.setText("$" + cursor.getString(9));
-                totalBudget += Integer.parseInt(cursor.getString(9));
-                insurances.setText("$" + cursor.getString(10));
-                totalBudget += Integer.parseInt(cursor.getString(10));
-                phone.setText("$" + cursor.getString(11));
-                totalBudget += Integer.parseInt(cursor.getString(11));
-                rent.setText("$" + cursor.getString(12));
-                totalBudget += Integer.parseInt(cursor.getString(12));
-                eat.setText("$" + cursor.getString(13));
-                totalBudget += Integer.parseInt(cursor.getString(13));
-                shop.setText("$" + cursor.getString(14));
-                totalBudget += Integer.parseInt(cursor.getString(14));
-                misc.setText("$" + cursor.getString(15));
-                totalBudget += Integer.parseInt(cursor.getString(15));
-
+                groceries.setText("$" + cursor.getString(1));
+                groc2 = Double.parseDouble(cursor.getString(1));
+                insurances.setText("$" + cursor.getString(2));
+                ins2 = Double.parseDouble(cursor.getString(2));
+                phone.setText("$" + cursor.getString(3));
+                ph2 = Double.parseDouble(cursor.getString(3));
+                rent.setText("$" + cursor.getString(4));
+                rnt2 = Double.parseDouble(cursor.getString(4));
+                eat.setText("$" + cursor.getString(5));
+                et2 = Double.parseDouble(cursor.getString(5));
+                shop.setText("$" + cursor.getString(6));
+                shp2 = Double.parseDouble(cursor.getString(6));
+                misc.setText("$" + cursor.getString(7));
+                msc2  = Double.parseDouble(cursor.getString(7));
+                totalBudget = groc2+ins2+ph2+rnt2+et2+shp2+msc2;
                 monthlyBudget.setText("$" + totalBudget);
             }
         } catch (Exception ex) {
         }
+
+        String query2 = "SELECT * FROM " + UserEntry.TABLE_NAME_3;
+        List<String> list = new ArrayList<>();
+        try {
+            Cursor cursor = rdb.rawQuery(query2, null);
+            if (cursor != null) {
+                cursor.move(1);
+                do {
+                    for (int i = 1; i < cursor.getColumnCount(); i++) {
+                        String x = cursor.getString(i);
+                        list.add(x);
+                        Log.d("d",cursor.getString(i));
+                    }
+                    List<String> temp = new ArrayList<>(list);
+                    list.remove(0);
+                    list.removeAll(Arrays.asList("0"));
+                    int i = temp.indexOf(list.get(0).toString());
+                    String s = v.getExpense(i);
+                    if (s == "Grocery")
+                        groc += Double.parseDouble(list.get(0));
+                    else if (s == "Insurance")
+                        ins += Double.parseDouble(list.get(0));
+                    else if (s == "Phone Bill")
+                        ph += Double.parseDouble(list.get(0));
+                    else if (s == "Rent")
+                        rnt += Double.parseDouble(list.get(0));
+                    else if (s == "Dinning Out")
+                        et += Double.parseDouble(list.get(0));
+                    else if (s == "Shopping")
+                        shp += Double.parseDouble(list.get(0));
+                    else if (s == "Miscellaneous")
+                        msc += Double.parseDouble(list.get(0));
+                    totalExpenditure += Double.parseDouble(list.get(0));
+                    list.clear();
+                } while (cursor.moveToNext());
+                currentExpenditure.setText("$" + totalExpenditure);
+                groceries2.setText("$" + groc);
+                insurances2.setText("$" + ins);
+                phone2.setText("$" + ph);
+                rent2.setText("$" + rnt);
+                eat2.setText("$" + et);
+                shop2.setText("$" + shp);
+                misc2.setText("$" + msc);
+                Log.d("groc",String.valueOf(checkprogress(msc2,msc)));
+                progressgroc.setProgress(checkprogress(groc2,groc));
+                progressinc.setProgress(checkprogress(ins2,ins));
+                progressphn.setProgress(checkprogress(ph2,ph));
+                progressrent.setProgress(checkprogress(rnt2,rnt));
+                progresseat.setProgress(checkprogress(et2,et));
+                progressshop.setProgress(checkprogress(shp2,shp));
+                progressmisc.setProgress(checkprogress(msc2,msc));
+
+                cursor.close();
+            }
+        } catch (Exception ex) {
+        }
+    }
+
+    public int checkprogress(Double x,Double y) {
+        if(y == 0)
+            return 100;
+        else {
+            double p = (y/x)*100;
+            int fp = (int) p;
+            if(fp <= 0)
+                return 0;
+            else if (fp > 100)
+                return 0;
+            else
+            return 100-fp;
+        }
+
     }
 }

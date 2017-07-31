@@ -1,4 +1,4 @@
-package com.raghavmarwah.pocketpal;
+package com.PocketPal.pocketpal;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
@@ -56,64 +56,54 @@ public class AddExpenseActivity extends AppCompatActivity {
         values.put(UserEntry.COLUMN_NAME_DATE, date);
 
         if(type.equals("Groceries")){
-            values.put(UserEntry.COLUMN_NAME_GROCERIES, amount);
-            Log.d("D","Success");
+            values.put(UserEntry.COLUMN_NAME_GROCERIES_EXP, amount);
         }
         else{
-            values.put(UserEntry.COLUMN_NAME_GROCERIES, 0);
-            Log.d("D","Failure");
+            values.put(UserEntry.COLUMN_NAME_GROCERIES_EXP, 0);
         }
 
         if(type.equals("Insurances")){
-            values.put(UserEntry.COLUMN_NAME_INSURANCES, amount);
+            values.put(UserEntry.COLUMN_NAME_INSURANCES_EXP, amount);
         }
         else{
-            values.put(UserEntry.COLUMN_NAME_INSURANCES, 0);
+            values.put(UserEntry.COLUMN_NAME_INSURANCES_EXP, 0);
         }
 
         if(type.equals("Phone Bill")){
-            values.put(UserEntry.COLUMN_NAME_BILLS, amount);
+            values.put(UserEntry.COLUMN_NAME_BILLS_EXP, amount);
         }
         else{
-            values.put(UserEntry.COLUMN_NAME_BILLS, 0);
+            values.put(UserEntry.COLUMN_NAME_BILLS_EXP, 0);
         }
 
         if(type.equals("Rent")){
-            values.put(UserEntry.COLUMN_NAME_RENT, amount);
+            values.put(UserEntry.COLUMN_NAME_RENT_EXP, amount);
         }
         else{
-            values.put(UserEntry.COLUMN_NAME_RENT, 0);
+            values.put(UserEntry.COLUMN_NAME_RENT_EXP, 0);
         }
 
         if(type.equals("Eating Out")){
-            values.put(UserEntry.COLUMN_NAME_EAT, amount);
+            values.put(UserEntry.COLUMN_NAME_EAT_EXP, amount);
         }
         else{
-            values.put(UserEntry.COLUMN_NAME_EAT, 0);
+            values.put(UserEntry.COLUMN_NAME_EAT_EXP, 0);
         }
 
         if(type.equals("Shopping")){
-            values.put(UserEntry.COLUMN_NAME_SHOP, amount);
+            values.put(UserEntry.COLUMN_NAME_SHOP_EXP, amount);
         }
         else{
-            values.put(UserEntry.COLUMN_NAME_SHOP, 0);
+            values.put(UserEntry.COLUMN_NAME_SHOP_EXP, 0);
         }
 
         if(type.equals("Miscellaneous")){
-            values.put(UserEntry.COLUMN_NAME_MISC, amount);
+            values.put(UserEntry.COLUMN_NAME_MISC_EXP, amount);
         }
         else{
-            values.put(UserEntry.COLUMN_NAME_MISC, 0);
+            values.put(UserEntry.COLUMN_NAME_MISC_EXP, 0);
         }
-
-        values.put(UserEntry.COLUMN_NAME_GROCERIES_L, 0);
-        values.put(UserEntry.COLUMN_NAME_INSURANCES_L, 0);
-        values.put(UserEntry.COLUMN_NAME_BILLS_L, 0);
-        values.put(UserEntry.COLUMN_NAME_RENT_L, 0);
-        values.put(UserEntry.COLUMN_NAME_EAT_L, 0);
-        values.put(UserEntry.COLUMN_NAME_SHOP_L, 0);
-        values.put(UserEntry.COLUMN_NAME_MISC_L, 0);
-
-        wdb.insert(UserEntry.TABLE_NAME_2, null, values);
+        Log.d("d",values.toString());
+        wdb.insert(UserEntry.TABLE_NAME_3, null, values);
     }
 }

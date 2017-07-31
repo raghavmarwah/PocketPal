@@ -1,4 +1,4 @@
-package com.raghavmarwah.pocketpal;
+package com.PocketPal.pocketpal;
 
 import android.Manifest;
 import android.content.ContentValues;
@@ -92,13 +92,13 @@ public class AddUserInfoActivity extends AppCompatActivity {
                     EditText misc = (EditText) findViewById(R.id.misc);
 
                     ContentValues values = new ContentValues();
-                    values.put(UserEntry.COLUMN_NAME_GROCERIES_L, groceries.getText().toString());
-                    values.put(UserEntry.COLUMN_NAME_INSURANCES_L, insurances.getText().toString());
-                    values.put(UserEntry.COLUMN_NAME_BILLS_L, phone.getText().toString());
-                    values.put(UserEntry.COLUMN_NAME_RENT_L, rent.getText().toString());
-                    values.put(UserEntry.COLUMN_NAME_EAT_L, eat.getText().toString());
-                    values.put(UserEntry.COLUMN_NAME_SHOP_L, shop.getText().toString());
-                    values.put(UserEntry.COLUMN_NAME_MISC_L, misc.getText().toString());
+                    values.put(UserEntry.COLUMN_NAME_GROCERIES, groceries.getText().toString());
+                    values.put(UserEntry.COLUMN_NAME_INSURANCES, insurances.getText().toString());
+                    values.put(UserEntry.COLUMN_NAME_BILLS, phone.getText().toString());
+                    values.put(UserEntry.COLUMN_NAME_RENT, rent.getText().toString());
+                    values.put(UserEntry.COLUMN_NAME_EAT, eat.getText().toString());
+                    values.put(UserEntry.COLUMN_NAME_SHOP, shop.getText().toString());
+                    values.put(UserEntry.COLUMN_NAME_MISC, misc.getText().toString());
                     wdb.insert(UserEntry.TABLE_NAME_2, null, values);
 
                     Intent intent = new Intent(AddUserInfoActivity.this, MonthViewActivity.class);

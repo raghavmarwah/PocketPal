@@ -1,4 +1,4 @@
-package com.raghavmarwah.pocketpal;
+package com.PocketPal.pocketpal;
 
 import org.junit.Test;
 

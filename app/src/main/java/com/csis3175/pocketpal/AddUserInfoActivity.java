@@ -67,10 +67,8 @@ public class AddUserInfoActivity extends AppCompatActivity {
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(defineProfile.getVisibility()==View.VISIBLE){
 
-                    boolean dataFilled = false;
-                    while(dataFilled) {
+                if(defineProfile.getVisibility()==View.VISIBLE){
                         EditText eNM = (EditText) findViewById(R.id.name);
                         EditText eEM = (EditText) findViewById(R.id.email);
                         EditText eIN = (EditText) findViewById(R.id.income);
@@ -84,7 +82,6 @@ public class AddUserInfoActivity extends AppCompatActivity {
                         bAdd.setText("FINISH");
                         defineProfile.setVisibility(View.INVISIBLE);
                         defineBudget.setVisibility(View.VISIBLE);
-                    }
                 }
                 else{
                     EditText groceries = (EditText) findViewById(R.id.groceries);

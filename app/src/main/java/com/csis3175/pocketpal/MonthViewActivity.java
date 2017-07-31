@@ -137,9 +137,9 @@ public class MonthViewActivity extends AppCompatActivity {
             Cursor cursor = rdb.rawQuery(query, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                username.setText(cursor.getString(1));
-                email.setText(cursor.getString(2));
-                inc.setText("$" + cursor.getString(3));
+                username.setText("Name: " + cursor.getString(1));
+                email.setText("email: " + cursor.getString(2));
+                inc.setText("Salary: $" + cursor.getString(3));
                 String uriimage = cursor.getString(4).toString();
                 Uri finalUri = Uri.parse("file:// "+ uriimage);
                 InputStream inputStream;
@@ -276,7 +276,7 @@ public class MonthViewActivity extends AppCompatActivity {
 
     public int checkprogress(Double x,Double y) {
         if(y == 0)
-            return 100;
+            return 0;
         else {
             double p = (y/x)*100;
             int fp = (int) p;
@@ -285,7 +285,7 @@ public class MonthViewActivity extends AppCompatActivity {
             else if (fp > 100)
                 return 0;
             else
-            return 100-fp;
+            return fp;
         }
 
     }

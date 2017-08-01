@@ -74,6 +74,16 @@
         android:layout_above="@id/splash_bottom_grass"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="60dp"
-        android:text="get started"/>
+        android:text="get started"
+        android:visibility="invisible"/>
+
+    <ProgressBar
+        android:id="@+id/progressIndeterminate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/splash_bottom_grass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:visibility="invisible"/>
 
 </RelativeLayout>

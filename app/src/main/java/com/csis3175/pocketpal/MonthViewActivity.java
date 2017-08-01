@@ -36,7 +36,8 @@ public class MonthViewActivity extends AppCompatActivity {
     LinearLayout homeLayout;
     RelativeLayout calendarLayout;
     RelativeLayout profileLayout;
-    RelativeLayout analystLayout;
+    LinearLayout analystLayout;
+
     MyDB db = new MyDB(this);
     private ImageView pic;
     ViewExpenseActivity v = new ViewExpenseActivity();
@@ -97,7 +98,7 @@ public class MonthViewActivity extends AppCompatActivity {
         homeLayout = (LinearLayout) findViewById(R.id.homeLayout);
         calendarLayout = (RelativeLayout) findViewById(R.id.calendarLayout);
         profileLayout = (RelativeLayout) findViewById(R.id.profileLayout);
-        analystLayout = (RelativeLayout) findViewById(R.id.analystLayout);
+        analystLayout = (LinearLayout) findViewById(R.id.analystLayout);
         pic = (ImageView) findViewById(R.id.propic);
 
         //Object Variables

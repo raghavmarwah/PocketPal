@@ -1,10 +1,12 @@
 package com.csis3175.pocketpal;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -27,11 +30,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class MonthViewActivity extends AppCompatActivity {
 
     LinearLayout homeLayout;
     RelativeLayout calendarLayout;
     RelativeLayout profileLayout;
+    RelativeLayout analystLayout;
     MyDB db = new MyDB(this);
     private ImageView pic;
     ViewExpenseActivity v = new ViewExpenseActivity();
@@ -49,22 +54,26 @@ public class MonthViewActivity extends AppCompatActivity {
                     homeLayout.setVisibility(View.VISIBLE);
                     calendarLayout.setVisibility(View.INVISIBLE);
                     profileLayout.setVisibility(View.INVISIBLE);
+                    analystLayout.setVisibility(View.INVISIBLE);
                     refreshEverything();
                     return true;
                 case R.id.navigationAnalyst:
-                    Intent intent = new Intent(MonthViewActivity.this, DisplayChartsActivity.class);
-                    startActivity(intent);
-                    finish();
+                    homeLayout.setVisibility(View.INVISIBLE);
+                    calendarLayout.setVisibility(View.INVISIBLE);
+                    profileLayout.setVisibility(View.INVISIBLE);
+                    analystLayout.setVisibility(View.VISIBLE);
                     return true;
                 case R.id.navigationCalendar:
                     homeLayout.setVisibility(View.INVISIBLE);
                     calendarLayout.setVisibility(View.VISIBLE);
                     profileLayout.setVisibility(View.INVISIBLE);
+                    analystLayout.setVisibility(View.INVISIBLE);
                     return true;
                 case R.id.navigationProfile:
                     homeLayout.setVisibility(View.INVISIBLE);
                     calendarLayout.setVisibility(View.INVISIBLE);
                     profileLayout.setVisibility(View.VISIBLE);
+                    analystLayout.setVisibility(View.INVISIBLE);
                     DisplayProfile();
                     return true;
             }
@@ -88,11 +97,28 @@ public class MonthViewActivity extends AppCompatActivity {
         homeLayout = (LinearLayout) findViewById(R.id.homeLayout);
         calendarLayout = (RelativeLayout) findViewById(R.id.calendarLayout);
         profileLayout = (RelativeLayout) findViewById(R.id.profileLayout);
+        analystLayout = (RelativeLayout) findViewById(R.id.analystLayout);
         pic = (ImageView) findViewById(R.id.propic);
 
         //Object Variables
         Button addExpenditure = (Button) findViewById(R.id.addExpButton);
         Button viewExpenditure = (Button) findViewById(R.id.viewExpButton);
+        ImageButton  incvsexp = (ImageButton) findViewById(R.id.image1);
+        ImageButton  piechart = (ImageButton) findViewById(R.id.image2);
+        piechart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent s = new Intent(MonthViewActivity.this,CompareExpense.class);
+                startActivity(s);
+            }
+        });
+        incvsexp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MonthViewActivity.this,IncVSExp.class);
+                startActivity(i);
+            }
+        });
 
         //onClick listeners
         addExpenditure.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +159,7 @@ public class MonthViewActivity extends AppCompatActivity {
         final SQLiteDatabase rdb = db.getReadableDatabase();
         final SQLiteDatabase wdb = db.getWritableDatabase();
         String query = "SELECT * FROM User";
+        final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS User , Budget , Expenditures;";
         try {
             Cursor cursor = rdb.rawQuery(query, null);
             if (cursor != null) {
@@ -158,7 +185,11 @@ public class MonthViewActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                try {
+                    wdb.rawQuery(SQL_DELETE_ENTRIES, null);
+                    Log.d("delete:no error","dd");
+                }catch (Exception ex){
+                Log.d("delete:error",ex.toString());}
             }
         });
     }
@@ -183,7 +214,6 @@ public class MonthViewActivity extends AppCompatActivity {
 
         TextView monthlyBudget = (TextView) findViewById(R.id.monthlyBudget);
         TextView currentExpenditure = (TextView) findViewById(R.id.currentExpenditure);
-
         ProgressBar progressgroc = (ProgressBar) findViewById(R.id.groceriesProgress);
         ProgressBar progressinc = (ProgressBar) findViewById(R.id.insurancesProgress);
         ProgressBar progressphn = (ProgressBar) findViewById(R.id.phoneProgress);
@@ -191,6 +221,7 @@ public class MonthViewActivity extends AppCompatActivity {
         ProgressBar progresseat = (ProgressBar) findViewById(R.id.eatProgress);
         ProgressBar progressshop = (ProgressBar) findViewById(R.id.shopProgress);
         ProgressBar progressmisc = (ProgressBar) findViewById(R.id.miscProgress);
+
 
         double totalBudget = 0;
         double totalExpenditure = 0;
@@ -279,6 +310,13 @@ public class MonthViewActivity extends AppCompatActivity {
                 progresseat.setProgress(checkProgress(et2,et));
                 progressshop.setProgress(checkProgress(shp2,shp));
                 progressmisc.setProgress(checkProgress(msc2,msc));
+                ProgressExceeded(progressgroc);
+                ProgressExceeded(progressinc);
+                ProgressExceeded(progressphn);
+                ProgressExceeded(progressrent);
+                ProgressExceeded(progresseat);
+                ProgressExceeded(progressshop);
+                ProgressExceeded(progressmisc);
 
                 cursor.close();
             }
@@ -300,5 +338,16 @@ public class MonthViewActivity extends AppCompatActivity {
             return fp;
         }
 
+    }
+
+    public void ProgressExceeded(ProgressBar p){
+        if(p.getProgress()>=50 && p.getProgress() <= 99)
+        {
+            p.setProgressTintList(ColorStateList.valueOf(Color.argb(100,253,95,0)));
+        }
+        else if(p.getProgress()==100)
+        {
+            p.setProgressTintList(ColorStateList.valueOf(Color.RED));
+        }
     }
 }

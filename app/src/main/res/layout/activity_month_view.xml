@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -434,6 +434,30 @@
                 android:layout_margin="10dp"/>
 
         </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/analystLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:visibility="invisible">
+
+        <ImageButton
+            android:id="@+id/image1"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"/>
+        <ImageButton
+        android:id="@+id/image2"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_below="@id/image1"/>
+        <ImageButton
+            android:id="@+id/image3"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_below="@id/image2"/>
 
     </RelativeLayout>
 

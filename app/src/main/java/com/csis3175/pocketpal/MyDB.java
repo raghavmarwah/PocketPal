@@ -11,7 +11,6 @@ public class MyDB extends SQLiteOpenHelper{
 
     public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "BudgetApp.db";
-
     public static final String SQL_CREATE_USER = "CREATE TABLE " +
             UserEntry.TABLE_NAME + " (" +
             UserEntry._ID + " INTEGER PRIMARY KEY, " +
@@ -43,7 +42,6 @@ public class MyDB extends SQLiteOpenHelper{
             UserEntry.COLUMN_NAME_SHOP_EXP + " DECIMAL, " +
             UserEntry.COLUMN_NAME_MISC_EXP + " DECIMAL)";
 
-    private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + UserEntry.TABLE_NAME + "," + UserEntry.TABLE_NAME_2 + "," + UserEntry.TABLE_NAME_3;
 
     public MyDB(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -66,4 +64,5 @@ public class MyDB extends SQLiteOpenHelper{
         Log.d("MyDB","onDowngrade");
         onUpgrade(db, oldVersion, newVersion);
     }
+
 }

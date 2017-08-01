@@ -51,15 +51,12 @@ public class AddUserInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
                 {
-                    img.setSelected(!img.isPressed());
-
-                    if (img.isPressed()) {
                         OpenGallery();
                         img.setImageResource(R.drawable.ic_check);
-                    }
                 }
                 else
                 {
+                    img.setImageResource(R.drawable.ic_check);
                     String[] permissionRequested = {Manifest.permission.READ_EXTERNAL_STORAGE};
                 requestPermissions(permissionRequested,1);
                 }
